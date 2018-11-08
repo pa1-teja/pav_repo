@@ -1,10 +1,11 @@
 package com.pearlcoaching.pearlcoaching;
 
 import android.content.Intent;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.pearlcoaching.pearlcoaching.ServicesModule.ServicesScreen;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -26,5 +27,6 @@ public class SplashScreen extends AppCompatActivity {
 
     private void goToNextScreen() {
         startActivity(new Intent(SplashScreen.this, ServicesScreen.class));
+        finish();
     }
 }
