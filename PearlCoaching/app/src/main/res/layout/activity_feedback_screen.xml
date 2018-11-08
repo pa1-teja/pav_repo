@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FeedbackScreen">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="12dp"
+        android:layout_marginBottom="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/service_img"
+        android:layout_width="wrap_content"
+        android:layout_height="195dp"
+        android:layout_alignParentTop="true"
+        android:layout_margin="12dp"
+        android:src="@drawable/corporate_coaching" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/service_img"
+        android:text="Corporate Coaching"
+        android:layout_marginLeft="12dp"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:id="@+id/service_header"
+        android:textStyle="bold"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal">
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:layout_weight="0.5"
+            android:id="@+id/name"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            />
+        <android.support.v7.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:id="@+id/client_name"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal">
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Phone:"
+            android:id="@+id/phone"
+            android:layout_weight="0.5"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            />
+        <android.support.v7.widget.AppCompatEditText
+            android:layout_width="0dp"
+            android:id="@+id/client_phone"
+            android:inputType="phone"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:id="@+id/parent_teacher_question"
+        android:text="If you are choosing the coaching service for the school students, confirm that you are a parent/teacher of the client:"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp"
+        android:orientation="horizontal">
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:id="@+id/parent"
+                android:text="Parent"
+                android:textColor="@android:color/black"/>
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:id="@+id/teacher"
+                android:text="Teacher"
+                android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/border_line">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:id="@+id/expectation_question"
+            android:text="Describe what is the expectation you have from the coaching service:"/>
+
+        <com.pearlcoaching.pearlcoaching.customEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expectation_response"
+            android:lines="5"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="12dp"
+        android:background="@drawable/border_line">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:id="@+id/timeline_question"
+            android:text="What is the timeline you are looking for to start the coaching:"/>
+
+        <com.pearlcoaching.pearlcoaching.customEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/coaching_timeline"
+            />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+            <RadioGroup
+                android:id="@+id/timeline_response"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/immediate"
+                android:text="Immediate"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/two_weeks"
+                android:text="In next 2 weeks"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/one_month"
+                android:text="In next 1 month"/>
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/after_a_month"
+                android:text="Beyond 1 month"/>
+            </RadioGroup>
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/shoot"
+            android:text="Book"/>
+    </LinearLayout>
+
+</ScrollView>

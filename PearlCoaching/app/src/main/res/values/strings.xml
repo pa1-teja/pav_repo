@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Pearl Coaching</string>
+    <!--<string name="default_web_client_id">769993340098-92fehcudj9uom0insruh3uvdm0u1q9u5.apps.googleusercontent.com</string>-->
+    <string name="facebook_app_id">1904071839889241</string>
+    <string name="fb_login_protocol_scheme">fb1904071839889241</string>
+
+    <string name="personal_coaching_header">Personal Coaching</string>
+    <string name="career_coaching_header">Career Coaching</string>
+    <string name="corporate_coaching_header">Corporate Coaching</string>
+    <string name="student_coaching_header">Student Coaching :</string>
+    <string name="personal_couching_drscription">This couching service is for the individuals who needs coaching for attaining personal goalsin their life which otherwise they are finding it difficult to achieve. Depending upon the need, service would include in addition to coaching, evaluations, assesments or workshops. These goals could be wide range depending on individual including but not limited to doing an academic course, picking up a skill, starting a job after a break, self-management, self-discouvery and letting-go. It is very subjective coaching which is catered to the needs of an individual. There will be mandatory 1x1 sessions as part of this service.</string>
+    <string name="corporate_coaching_description">This Coaching service is exclusively for corporate clients where they have a group of people or teams that need to be coached for personal effectiveness helping groups to function. Focus would be to help them identify individual and team strengths,so that the group performs multiple times of their current performance. There will be mandatory 1x1 sessions as part of this service.</string>
+    <string name="career_coaching_description">This coaching service is for those who needs coaching in drawing career plan which otherwise they\'re finding it difficult to get support on. Focus would be to help them identify their strengths, passion, and career target to achieve and plan to achieve the same that suits their personality and attitude. Depending upon the need service would include in addition to coaching, evaluations, assessments and workshops. There will be mandatory 1x1 sessions as part of this service.</string>
+    <string name="student_coaching_description">This coaching service is for school/college students who needs coaching in preparing academic and career roadmaps which otherwise they are finding it difficult to draw independently. Typical school student focus is for 8th 9th and 10th grade students in India. Focus would be to help them identify their strengths, passion, future market needs and draw a multiple option academic roadmap to achieve best credentials that suits their personality and attitude. Typical college student focus is on the final and pre-final year students in India. Focus would be to help them draw the career roadmaps based on strengths, passion and industry they want to get into. Depending on the need service would include in addition to coaching, evaluations, assessments or workshops. There will bre mandatory 1x1 sessions as part of this service.</string>
+
+    <string name="mail_body">Hi \n Please have a look at the following details:</string>
+</resources>
