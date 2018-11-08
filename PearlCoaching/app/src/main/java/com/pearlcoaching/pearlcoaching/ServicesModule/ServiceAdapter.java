@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.pearlcoaching.pearlcoaching.R;
 
-public class ServiceAdapter extends RecyclerView.Adapter<viewHolder> {
+public class ServiceAdapter extends RecyclerView.Adapter<ServiceItemHolder> {
 
     private OnServiceInteraction mListener;
     int[] serviceImages = {
@@ -30,17 +30,17 @@ public class ServiceAdapter extends RecyclerView.Adapter<viewHolder> {
 
     @NonNull
     @Override
-    public viewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ServiceItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.service_list_item,viewGroup,false);
 
-        viewHolder viewHolder = new viewHolder(itemView, mListener);
+        ServiceItemHolder viewHolder = new ServiceItemHolder(itemView, mListener);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final viewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ServiceItemHolder viewHolder, int i) {
         viewHolder.serviceImage.setImageResource(serviceImages[i]);
         viewHolder.serviceImage.setTag(i);
     }

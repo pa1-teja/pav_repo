@@ -7,11 +7,11 @@ import android.widget.ImageView;
 
 import com.pearlcoaching.pearlcoaching.R;
 
-public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ServiceItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public ImageView serviceImage;
     OnServiceInteraction mListener;
-    public viewHolder(@NonNull View itemView, OnServiceInteraction listener) {
+    public ServiceItemHolder(@NonNull View itemView, OnServiceInteraction listener) {
         super(itemView);
         mListener = listener;
         serviceImage = itemView.findViewById(R.id.services_list_item_img);
@@ -20,12 +20,12 @@ public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        mListener.onServiceBooking((Integer) v.getTag());
-        /*viewHolder.serviceImage.setOnClickListener(new View.OnClickListener() {
+        mListener.onServiceInfo((Integer) v.getTag());
+        /*ServiceItemHolder.serviceImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent sdIntent = new Intent(mContext, ServiceDescription.class);
-                data.putInt("service_image",serviceImages[viewHolder.getAdapterPosition()]);
+                data.putInt("service_image",serviceImages[ServiceItemHolder.getAdapterPosition()]);
                 sdIntent.putExtra("service_details",data);
                 mContext.startActivity(sdIntent);
             }

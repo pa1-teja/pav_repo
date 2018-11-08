@@ -3,7 +3,6 @@ package com.pearlcoaching.pearlcoaching.ServicesModule;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,22 +71,22 @@ public class ServiceInfo extends BaseFragment {
                 break;
 
             case 2:
-                service_img.setImageResource(R.drawable.corporate_coaching);
-                mTVHeader.setText(R.string.corporate_coaching_header);
-                mTVDescription.setText(R.string.corporate_coaching_description);
-                break;
-
-            case 3:
                 service_img.setImageResource(R.drawable.student_coaching);
                 mTVHeader.setText(R.string.student_coaching_header);
                 mTVDescription.setText(R.string.student_coaching_description);
+                break;
+
+            case 3:
+                service_img.setImageResource(R.drawable.corporate_coaching);
+                mTVHeader.setText(R.string.corporate_coaching_header);
+                mTVDescription.setText(R.string.corporate_coaching_description);
                 break;
         }
 
         mBTBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),FeedbackScreen.class));
+                mListener.onServiceBooking(mID);
             }
         });
         return view;

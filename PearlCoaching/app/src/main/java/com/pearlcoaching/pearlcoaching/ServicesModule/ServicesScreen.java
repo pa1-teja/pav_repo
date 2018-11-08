@@ -24,12 +24,12 @@ public class ServicesScreen extends BaseActivity implements OnServiceInteraction
 
     @Override
     public void onServiceInfo(int serviceId) {
-
+        Toast.makeText(this, "onServiceBooking: "+serviceId,Toast.LENGTH_LONG).show();
+        addFragment(ServiceInfo.newInstance(serviceId),true,true,ServiceInfo.class.getName());
     }
 
     @Override
     public void onServiceBooking(int serviceId) {
-        Toast.makeText(this, "onServiceBooking: "+serviceId,Toast.LENGTH_LONG).show();
-        addFragment(ServiceInfo.newInstance(serviceId),true,true,ServiceInfo.class.getName());
+        addFragment(ServiceBooking.newInstance(serviceId), true,false,ServiceBooking.class.getName());
     }
 }

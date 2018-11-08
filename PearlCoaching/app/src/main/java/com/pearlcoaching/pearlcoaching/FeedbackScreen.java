@@ -38,7 +38,7 @@ public class FeedbackScreen extends AppCompatActivity {
         String client_phone= phone.getText().toString();
         String parent_teacher_ques = parent_teacher_question.getText().toString();
 
-        emailIntent.setData(Uri.parse("mailto:"));
+        /*emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.setType("text/plain");
         emailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[]{"Recipient"});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "subject");
@@ -47,7 +47,7 @@ public class FeedbackScreen extends AppCompatActivity {
             if (client_phone != null && client_phone != "")
         emailIntent.putExtra(Intent.EXTRA_TEXT   ,
                 getResources().getString(R.string.mail_body) +
-        "\n \n" + "Name : " + client_name);
+        "\n \n" + "Name : " + client_name);*/
 
 
     }
