@@ -2,6 +2,7 @@ package com.pearlcoaching.pearlcoaching;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -12,31 +13,38 @@ public class customEditText extends android.support.v7.widget.AppCompatEditText 
     private Rect mRect;
     private Paint mPaint;
 
-    public customEditText(Context context, AttributeSet attrs)
-    {
+    public customEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
+
         mRect = new Rect();
         mPaint = new Paint();
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(0xFF000000);
+        // define the style of line
+        mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        // define the color of line
+        mPaint.setColor(Color.BLACK);
     }
 
-    /**
-     * This is called to draw the LinedEditText object
-     * @param canvas The canvas on which the background is drawn.
-     */
     @Override
-    protected void onDraw(Canvas canvas)
-    {
-        int height = canvas.getHeight();
-        int curHeight = 0;
+    protected void onDraw(Canvas canvas) {
+        int height = getHeight();
+        int lHeight = getLineHeight();
+        // the number of line
+        int count = height / lHeight;
+        if (getLineCount() > count) {
+            // for long text with scrolling
+            count = getLineCount();
+        }
         Rect r = mRect;
         Paint paint = mPaint;
+
+        // first line
         int baseline = getLineBounds(0, r);
-        for (curHeight = baseline + 1; curHeight < height;
-             curHeight += getLineHeight())
-        {
-            canvas.drawLine(r.left, curHeight, r.right, curHeight, paint);
+
+        // draw the remaining lines.
+        for (int i = 0; i < count; i++) {
+            canvas.drawLine(r.left, baseline + 1, r.right, baseline + 1, paint);
+            // next line
+            baseline += getLineHeight();
         }
         super.onDraw(canvas);
     }
