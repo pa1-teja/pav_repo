@@ -38,7 +38,7 @@
 
         <activity android:name=".LoginScreen" />
         <activity android:name=".ServiceDescription" />
-        <activity android:name=".ServicesModule.ServicesScreen" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".ServicesModule.ServicesScreen" />
         <activity android:name=".FeedbackScreen"></activity>
     </application>
 

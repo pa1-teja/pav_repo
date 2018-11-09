@@ -26,7 +26,8 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void goToNextScreen() {
-        startActivity(new Intent(SplashScreen.this, ServicesScreen.class));
+//        startActivity(new Intent(SplashScreen.this, ServicesScreen.class));
+        startActivity(new Intent(SplashScreen.this, LoginScreen.class));
         finish();
     }
 }
