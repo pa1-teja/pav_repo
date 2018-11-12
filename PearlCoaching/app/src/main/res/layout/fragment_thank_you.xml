@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ServicesModule.ThankYou">
-    <TextView
-        android:textSize="32dp"
-        android:text="Thank you"
+    <ImageView
+        android:background="@drawable/thank_you"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerInside"/>
