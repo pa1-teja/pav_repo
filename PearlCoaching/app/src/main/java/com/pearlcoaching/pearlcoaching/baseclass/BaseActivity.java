@@ -24,4 +24,17 @@ public class BaseActivity extends AppCompatActivity {
         }
         fragmentTransaction.commit();
     }
+    protected void addFragment(Fragment fragment, boolean isReplace, boolean isAddToBackStack, String fragment_name) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if(isReplace) {
+            fragmentTransaction.replace(R.id.base_container, fragment, fragment_name);
+        } else {
+            fragmentTransaction.add(R.id.base_container, fragment, fragment_name);
+        }
+        if(isAddToBackStack) {
+            fragmentTransaction.addToBackStack(fragment_name);
+        }
+        fragmentTransaction.commit();
+    }
 }

@@ -15,7 +15,7 @@ public class ServicesScreen extends BaseActivity implements OnServiceInteraction
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_activity);
         bundle = getIntent().getExtras();
-        addFragment(ServiceHome.newInstance("",""),false,false,ServiceHome.class.getName(),bundle);
+        addFragment(ServiceHome.newInstance("",""),false,false,ServiceHome.class.getName());
 
 
     }
@@ -28,11 +28,17 @@ public class ServicesScreen extends BaseActivity implements OnServiceInteraction
     @Override
     public void onServiceInfo(int serviceId) {
 //        Toast.makeText(this, "onServiceBooking: "+serviceId,Toast.LENGTH_LONG).show();
-        addFragment(ServiceInfo.newInstance(serviceId),true,true,ServiceInfo.class.getName(),bundle);
+        addFragment(ServiceInfo.newInstance(serviceId),true,true,ServiceInfo.class.getName());
     }
 
     @Override
     public void onServiceBooking(int serviceId) {
+        bundle.putInt(ServiceBooking.ARG_PARAM1, serviceId);
         addFragment(ServiceBooking.newInstance(serviceId), true,false,ServiceBooking.class.getName(),bundle);
+    }
+
+    @Override
+    public void onThankYou(String text) {
+        addFragment(ThankYou.newInstance("",""),true,true,ThankYou.class.getName());
     }
 }

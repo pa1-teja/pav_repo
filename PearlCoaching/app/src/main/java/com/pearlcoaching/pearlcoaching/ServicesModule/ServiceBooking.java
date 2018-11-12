@@ -45,7 +45,7 @@ import java.util.regex.Pattern;
 public class ServiceBooking extends BaseFragment implements View.OnClickListener {
 
 
-    private static final String ARG_PARAM1 = "param1";
+    static final String ARG_PARAM1 = "param1";
     private static final String TAG = "ServiceBooking";
 
     private int mID;
@@ -173,6 +173,8 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                 break;
 
             case 2:
+                view.findViewById(R.id.parent_teacher_group).setVisibility(View.VISIBLE);
+                view.findViewById(R.id.parent_teacher_question).setVisibility(View.VISIBLE);
                 service_img.setImageResource(R.drawable.student_coaching);
                 break;
 
@@ -233,7 +235,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == false){
+                if (!hasFocus){
 
                     if (client_name == null || client_name.isEmpty() || client_name.length() > 3){
                         new AlertDialog.Builder(getActivity()).setTitle("Alert").setMessage("Your name should be more than 3 letters. Please check again").create().show();
@@ -295,13 +297,18 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         emailIntent.setType("text/html");
         emailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[]{"pearlcoaching.in@gmail.com"});
         emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Client Details");
+        String text="";
+        if(mID == 2) {
+            text = "<tr>  <td> " + parent_teacher_question.getText() + " : </td> <td>" + parent_teacher_response + "</td> </tr> <br><br>";
+        }
         String body = "<tr>  <td>Name : </td> <td>" + name.getText() +"</td> </tr> <br><br>"+
                 "<tr>  <td>Phone number : </td> <td>" + client_phone + "</td> </tr> <br><br>"+
-                "<tr>  <td> " + parent_teacher_question.getText() + " : </td> <td>" + parent_teacher_response + "</td> </tr> <br><br>"+
+                text+
                 "<tr>  <td>" + expectation_question.getText()+ " :  </td> <td>" + expectation_response.getText() + "</td> </tr> <br><br>"+
                 "<tr>  <td>" + timeline_question.getText() +": </td> <td> " + timeline_response + "</td> </tr> <br>";
         emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(body));
         startActivity(Intent.createChooser(emailIntent, "Email:"));
+        mListener.onThankYou("");
     }
 
     //the method is sending verification code

@@ -107,6 +107,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatTextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -118,6 +119,7 @@
             />
 
         <RadioGroup
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="24dp"
@@ -239,12 +241,8 @@
         </RadioGroup>
 
         <android.support.v7.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="22dp"
+            style="@style/st_button_submit"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/button_submit"
             android:id="@+id/shoot"
             android:text="Book Now"/>
     </LinearLayout>
