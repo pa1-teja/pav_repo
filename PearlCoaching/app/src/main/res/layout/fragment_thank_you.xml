@@ -3,8 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000"
     tools:context=".ServicesModule.ThankYou">
+
     <ImageView
+        android:visibility="gone"
+        android:id="@+id/thank_you"
         android:background="@drawable/thank_you"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

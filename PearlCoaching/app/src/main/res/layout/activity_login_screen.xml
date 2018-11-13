@@ -23,27 +23,15 @@
         android:layout_marginBottom="80dp"
         android:id="@+id/fb_log_in"/>
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_below="@id/google_log_in"-->
-        <!--android:layout_marginTop="120dp"-->
-        <!--android:orientation="horizontal">-->
-        <!--<View-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="2dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@android:color/black"/>-->
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="or"/>-->
-        <!--<View-->
-            <!--android:layout_width="0dp"-->
-            <!--android:layout_height="2dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:background="@android:color/black"/>-->
-    <!--</LinearLayout>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/web_url"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="32dp"
+        android:gravity="center_horizontal"/>
 
 </RelativeLayout>

@@ -3,16 +3,21 @@ package com.pearlcoaching.pearlcoaching.ServicesModule;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.pearlcoaching.pearlcoaching.R;
 
 public class ThankYou extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private final int SPLASH_DISPLAY_LENGTH = 3000;
+
+     ImageView thankYouImage;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -46,7 +51,16 @@ public class ThankYou extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_thank_you, container, false);
+        View view = inflater.inflate(R.layout.fragment_thank_you, container, false);
+        thankYouImage = view.findViewById(R.id.thank_you);
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                /* Create an Intent that will start the Menu-Activity. */
+               thankYouImage.setVisibility(View.VISIBLE);
+            }
+        }, SPLASH_DISPLAY_LENGTH);
+        return view;
     }
 
 

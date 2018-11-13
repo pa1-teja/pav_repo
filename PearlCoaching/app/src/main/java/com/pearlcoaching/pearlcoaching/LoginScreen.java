@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -45,6 +49,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private GoogleSignInClient mGoogleSignInClient;
     private LoginButton loginButton;
     private CallbackManager mCallbackManager;
+    private TextView webLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +58,15 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         TAG = getPackageName();
         mAuth = FirebaseAuth.getInstance();
         mSignInButton = findViewById(R.id.google_log_in);
+        webLink = findViewById(R.id.web_url);
         mSignInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        String str = "Click this link to visit ";
+        String webUrl = str +"<a href=\"http://www.pearlcoaching.in\"> Pearl Coaching </a>";
+        Spanned link = Html.fromHtml(webUrl);
+
+        webLink.setMovementMethod(LinkMovementMethod.getInstance());
+        webLink.setText(link);
 
         // Configure Google Sign In
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

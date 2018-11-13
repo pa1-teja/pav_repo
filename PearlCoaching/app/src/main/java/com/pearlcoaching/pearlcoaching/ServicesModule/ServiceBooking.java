@@ -194,7 +194,6 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         otp_module = view.findViewById(R.id.otp_module);
         sent_otp_code = view.findViewById(R.id.sent_otp_code);
 
-
         if (client_name != null && !client_name.isEmpty())
             name.setText(client_name);
         if (client_phone != null && !client_phone.isEmpty())
@@ -237,7 +236,8 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus){
 
-                    if (client_name == null || client_name.isEmpty() || client_name.length() > 3){
+                    client_name = name.getText().toString();
+                    if ((client_name == null || client_name.isEmpty() )|| client_name.length() <= 2){
                         new AlertDialog.Builder(getActivity()).setTitle("Alert").setMessage("Your name should be more than 3 letters. Please check again").create().show();
                     }
 
