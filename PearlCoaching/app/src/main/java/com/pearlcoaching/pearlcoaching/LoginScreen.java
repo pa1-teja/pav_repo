@@ -50,7 +50,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private GoogleSignInClient mGoogleSignInClient;
     private LoginButton loginButton;
     private CallbackManager mCallbackManager;
-    private TextView webLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +58,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         TAG = getPackageName();
         mAuth = FirebaseAuth.getInstance();
         mSignInButton = findViewById(R.id.google_log_in);
-        webLink = findViewById(R.id.web_url);
         mSignInButton.setSize(SignInButton.SIZE_STANDARD);
-        webLink.setText(Html.fromHtml(getString(R.string.web_link_text)));
-        webLink.setOnClickListener(this);
         // Configure Google Sign In
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -103,10 +99,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.web_url:
-                Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(getString(R.string.web_link_url)));
-                startActivity(browserIntent);
-                break;
             case R.id.google_log_in:
                 signIn();
                 break;

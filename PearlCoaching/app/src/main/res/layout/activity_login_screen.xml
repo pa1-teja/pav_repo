@@ -7,31 +7,27 @@
     android:background="@drawable/login_bg"
     tools:context=".LoginScreen">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
     <com.google.android.gms.common.SignInButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="130dp"
-        android:id="@+id/google_log_in"
-        android:layout_centerInParent="true"/>
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/google_log_in" />
 
     <com.facebook.login.widget.LoginButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="32dp"
         android:id="@+id/fb_log_in"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/web_url"
-        android:autoLink="web"
-        android:linksClickable="true"
-        android:clickable="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
-        android:gravity="center_horizontal"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
