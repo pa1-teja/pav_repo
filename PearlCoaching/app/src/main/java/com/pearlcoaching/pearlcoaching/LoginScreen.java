@@ -1,6 +1,7 @@
 package com.pearlcoaching.pearlcoaching;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,14 +61,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         mSignInButton = findViewById(R.id.google_log_in);
         webLink = findViewById(R.id.web_url);
         mSignInButton.setSize(SignInButton.SIZE_STANDARD);
-
-        String str = "Click this link to visit ";
-        String webUrl = str +"<a href=\"http://www.pearlcoaching.in\"> Pearl Coaching </a>";
-        Spanned link = Html.fromHtml(webUrl);
-
-        webLink.setMovementMethod(LinkMovementMethod.getInstance());
-        webLink.setText(link);
-
+        webLink.setText(Html.fromHtml(getString(R.string.web_link_text)));
+        webLink.setOnClickListener(this);
         // Configure Google Sign In
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -107,8 +102,14 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.google_log_in){
-            signIn();
+        switch (v.getId()){
+            case R.id.web_url:
+                Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(getString(R.string.web_link_url)));
+                startActivity(browserIntent);
+                break;
+            case R.id.google_log_in:
+                signIn();
+                break;
         }
     }
 
