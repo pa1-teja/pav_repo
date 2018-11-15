@@ -184,6 +184,7 @@
             android:layout_marginLeft="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginRight="12dp"
+            android:layout_marginBottom="22dp"
             android:background="@drawable/border_line">
 
             <android.support.v7.widget.AppCompatTextView
