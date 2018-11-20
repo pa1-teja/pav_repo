@@ -6,6 +6,7 @@
         android:id="@+id/log_out"
         app:showAsAction="ifRoom"
         android:orderInCategory="10"
+        android:icon="@drawable/logout"
         android:title="Log Out" />
 
 </menu>

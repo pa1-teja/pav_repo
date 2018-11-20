@@ -15,8 +15,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceItemHolder> {
     private OnServiceInteraction mListener;
     int[] serviceImages = {
             R.drawable.personal_coaching,
-            R.drawable.career_coaching,
             R.drawable.student_coaching,
+            R.drawable.career_coaching,
             R.drawable.corporate_coaching,
     };
 

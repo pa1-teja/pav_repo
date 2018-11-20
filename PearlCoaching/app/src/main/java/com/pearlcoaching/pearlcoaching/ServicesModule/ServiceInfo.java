@@ -65,15 +65,15 @@ public class ServiceInfo extends BaseFragment {
                 break;
 
             case 1:
-                service_img.setImageResource(R.drawable.career_coaching);
-                mTVHeader.setText(R.string.career_coaching_header);
-                mTVDescription.setText(R.string.career_coaching_description);
-                break;
-
-            case 2:
                 service_img.setImageResource(R.drawable.student_coaching);
                 mTVHeader.setText(R.string.student_coaching_header);
                 mTVDescription.setText(R.string.student_coaching_description);
+                break;
+
+            case 2:
+                service_img.setImageResource(R.drawable.career_coaching);
+                mTVHeader.setText(R.string.career_coaching_header);
+                mTVDescription.setText(R.string.career_coaching_description);
                 break;
 
             case 3:

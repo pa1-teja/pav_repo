@@ -39,12 +39,16 @@ public class ServicesScreen extends BaseActivity implements OnServiceInteraction
          fab = findViewById(R.id.fab);
         fab1 = findViewById(R.id.fab1);
         fab2 = findViewById(R.id.fab2);
+        fab1.setVisibility(View.GONE);
+        fab2.setVisibility(View.GONE);
 //        fab3 = findViewById(R.id.fab3);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!isFABOpen){
                     fab.animate().rotation(90);
+                    fab1.setVisibility(View.VISIBLE);
+                    fab2.setVisibility(View.VISIBLE);
                     showFABMenu();
                 }else{
                     fab.animate().rotation(-90);
@@ -65,7 +69,7 @@ public class ServicesScreen extends BaseActivity implements OnServiceInteraction
             @Override
             public void onClick(View v) {
                  phoneIntent = new Intent(Intent.ACTION_CALL);
-
+                 phoneIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 phoneIntent.setData(Uri.parse("tel:" + getString(R.string.phone)));
                 if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.M) {
 
