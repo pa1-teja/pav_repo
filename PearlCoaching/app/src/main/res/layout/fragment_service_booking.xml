@@ -195,7 +195,9 @@
                 android:id="@+id/timeline_question"
                 android:text="What is the timeline you are looking for to start the coaching:"/>
 
-            <com.pearlcoaching.pearlcoaching.customEditText
+            <TextView
+                android:layout_margin="16dp"
+                android:textSize="16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
@@ -241,11 +243,23 @@
                     android:text="Beyond 1 month"/>
         </RadioGroup>
 
+        <LinearLayout
+            android:weightSum="2"
+            android:layout_gravity="center"
+            android:layout_margin="22dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <android.support.v7.widget.AppCompatButton
             style="@style/st_button_submit"
-            android:layout_gravity="center_horizontal"
             android:id="@+id/shoot"
-            android:text="Book Now"/>
+            android:text="@string/book_now"/>
+            <android.support.v7.widget.AppCompatButton
+                android:visibility="gone"
+                style="@style/st_button_submit"
+                android:id="@+id/next"
+                android:text="@string/next"/>
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

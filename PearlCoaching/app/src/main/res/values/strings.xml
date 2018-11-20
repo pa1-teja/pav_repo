@@ -21,5 +21,7 @@
     <string name="web_link_text"><![CDATA[<u><h2>Click this link to visit Pearl Coaching</h2></u>]]></string>
     <string name="web_link_url">http://www.pearlcoaching.in</string>
     <string name="phone">+918970289345</string>
+    <string name="book_now">Book Now</string>
+    <string name="next">NEXT</string>
 
 </resources>

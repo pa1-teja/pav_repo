@@ -1,6 +1,7 @@
 package com.pearlcoaching.pearlcoaching.ServicesModule;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
@@ -28,12 +30,13 @@ public class ServicesScreen extends BaseActivity implements OnServiceInteraction
     private Intent phoneIntent;
     private FloatingActionButton fab;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base_activity);
         bundle = getIntent().getExtras();
-        addFragment(ServiceHome.newInstance("",""),false,false,ServiceHome.class.getName());
+        addFragment(ServiceHome.newInstance("",""),false,true,ServiceHome.class.getName());
 //        extra_stuff = findViewById(R.id.extra_stuff);
 
          fab = findViewById(R.id.fab);
@@ -128,6 +131,9 @@ public class ServicesScreen extends BaseActivity implements OnServiceInteraction
 
     @Override
     public void onThankYou(String text) {
-        addFragment(ThankYou.newInstance("",""),true,true,ThankYou.class.getName());
+        //FragmentManager fragmentManager = getSupportFragmentManager();
+        //this will clear the back stack and displays no animation on the screen
+        //fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        addFragment(ThankYou.newInstance("",""),true,false,ThankYou.class.getName());
     }
 }

@@ -2,7 +2,9 @@ package com.pearlcoaching.pearlcoaching.ServicesModule;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TabWidget;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,6 +45,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
+
 public class ServiceBooking extends BaseFragment implements View.OnClickListener {
 
 
@@ -54,9 +59,10 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
     private OnServiceInteraction mListener;
     ImageView service_img;
     AppCompatEditText name,phone,sent_otp_code;
-    customEditText expectation_response,timeline;
+    customEditText expectation_response;
+    TextView timeline;
     AppCompatTextView parent_teacher_question,expectation_question,timeline_question,service_header;
-    AppCompatButton bookNow;
+    AppCompatButton bookNow, mNext;
     Intent emailIntent;
     LinearLayout otp_module;
 
@@ -69,6 +75,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
     private String client_phone,timeline_response;
     private String client_name, parent_teacher_response;
     private String client_email;
+    private Pattern pattern;
 
     public ServiceBooking() {
         // Required empty public constructor
@@ -109,7 +116,9 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         timelineGroup = view.findViewById(R.id.timeline_response);
         parentTeacherGroup.clearCheck();
         timeline = view.findViewById(R.id.coaching_timeline);
-
+        timeline.setTypeface(null, Typeface.BOLD_ITALIC);
+        mNext = view.findViewById(R.id.next);
+        mNext.setOnClickListener(this);
         parentTeacherGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -200,9 +209,9 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             phone.setText(client_phone);
 
 
-        String parent_teacher_ques = parent_teacher_question.getText().toString();
+//        String parent_teacher_ques = parent_teacher_question.getText().toString();
 
-
+        pattern = Pattern.compile("(0/91)?[6-9][0-9]{9}");
 
         phone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -215,7 +224,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                 Log.e(")))", "start : " + start + " b4 : " + before + " count :" + count);
                 if (start ==9){
                     client_phone= phone.getText().toString();
-                    Pattern pattern = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+//                    pattern = Pattern.compile("(0/91)?[7-9][0-9]{9}");
                     if (pattern.matcher(client_phone).matches()) {
                         otp_module.setVisibility(View.VISIBLE);
                         sendVerificationCode(client_phone);
@@ -291,24 +300,25 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
 
     void sendMail() {
 
-
-        final Intent emailIntent = new Intent(Intent.ACTION_SEND);
-//        emailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        emailIntent.setType("text/html");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[]{"pearlcoaching.in@gmail.com"});
-        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Client Details");
-        String text="";
-        if(mID == 2) {
-            text = "<tr>  <td> " + parent_teacher_question.getText() + " : </td> <td>" + parent_teacher_response + "</td> </tr> <br><br>";
+        if(checkValidation()) {
+            final Intent emailIntent = new Intent(Intent.ACTION_SEND);
+            //        emailIntent.setData(Uri.parse("mailto:")); // only email apps should handle this
+            emailIntent.setType("text/html");
+            emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"pearlcoaching.in@gmail.com"});
+            emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Client Details");
+            String text = "";
+            if (mID == 2) {
+                text = "<tr>  <td> " + parent_teacher_question.getText() + " : </td> <td>" + parent_teacher_response + "</td> </tr> <br><br>";
+            }
+            String body = "<tr>  <td>Name : </td> <td>" + name.getText() + "</td> </tr> <br><br>" +
+                    "<tr>  <td>Phone number : </td> <td>" + client_phone + "</td> </tr> <br><br>" +
+                    text +
+                    "<tr>  <td>" + expectation_question.getText() + " :  </td> <td>" + expectation_response.getText() + "</td> </tr> <br><br>" +
+                    "<tr>  <td>" + timeline_question.getText() + ": </td> <td> " + timeline_response + "</td> </tr> <br>";
+            emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(body));
+            startActivity(Intent.createChooser(emailIntent, "Email:"));
+            mNext.setVisibility(View.VISIBLE);
         }
-        String body = "<tr>  <td>Name : </td> <td>" + name.getText() +"</td> </tr> <br><br>"+
-                "<tr>  <td>Phone number : </td> <td>" + client_phone + "</td> </tr> <br><br>"+
-                text+
-                "<tr>  <td>" + expectation_question.getText()+ " :  </td> <td>" + expectation_response.getText() + "</td> </tr> <br><br>"+
-                "<tr>  <td>" + timeline_question.getText() +": </td> <td> " + timeline_response + "</td> </tr> <br>";
-        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(body));
-        startActivity(Intent.createChooser(emailIntent, "Email:"));
-        mListener.onThankYou("");
     }
 
     //the method is sending verification code
@@ -399,6 +409,59 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        sendMail();
+        switch (v.getId()) {
+            case R.id.shoot:
+                sendMail();
+                break;
+            case R.id.next:
+                goToThankYouPage();
+                break;
+        }
+    }
+
+    private void goToThankYouPage() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Confirm");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("Your data will not exist| Please make sure to mailed the data  ,Are you sure you want go next?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                mListener.onThankYou("");
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Write your code here to invoke NO event
+                //Toast.makeText(getApplicationContext(), "NO", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
+    }
+
+    boolean checkValidation() {
+        //boolean isValid = true;
+        if(null != client_phone && pattern.matcher(client_phone).matches()) {
+            Toast.makeText(getActivity(), "Please enter valid phone number.",Toast.LENGTH_LONG).show();
+            return false;
+        } else if(null != expectation_response && expectation_response.getText().toString().length()>0) {
+            Toast.makeText(getActivity(), "Please enter your expectations from the service.",Toast.LENGTH_LONG).show();
+            return false;
+        } else if(null != timeline_response && timeline_response.length()>0) {
+            Toast.makeText(getActivity(), "Please select the timeline.",Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
 }

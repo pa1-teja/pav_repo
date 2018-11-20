@@ -8,12 +8,14 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class FeedbackScreen extends AppCompatActivity {
 
      ImageView service_img;
      AppCompatEditText name,phone;
-     customEditText expectation_response,timeline;
+     customEditText expectation_response;
+     TextView timeline;
      AppCompatTextView parent_teacher_question,expectation_question,timeline_question,service_header;
      AppCompatButton book_now;
      Intent emailIntent;

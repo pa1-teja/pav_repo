@@ -194,23 +194,20 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
 
     public void updateUI(FirebaseUser user){
-        Intent intent = new Intent(this,ServicesScreen.class);
-        intent.addCategory(Intent.ACTION_MAIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        if (user != null){
-            Log.d(TAG,"user signed in : " + user.getEmail());
-            Log.d(TAG,"user signed in : " + user.getDisplayName());
+        if (user != null) {
+
+            Intent intent = new Intent(this,ServicesScreen.class);
             if (user.getEmail()!=null && !user.getEmail().isEmpty())
                 intent.putExtra("email",user.getEmail());
             if (user.getDisplayName() != null && !user.getDisplayName().isEmpty())
                 intent.putExtra("displayName",user.getDisplayName());
             if (user.getPhoneNumber() != null && !user.getPhoneNumber().isEmpty())
                 intent.putExtra("phoneNumber",user.getPhoneNumber());
+
+            /*intent.addCategory(Intent.ACTION_MAIN);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);*/
             startActivity(intent);
-        }
-        else {
-            Log.d(TAG,"user sign in failed");
-            Toast.makeText(this,"Login Failed",Toast.LENGTH_LONG).show();
+            finish();
         }
     }
 }
