@@ -31,6 +31,14 @@
           }
         },
         {
+          "client_id": "769993340098-vv0nad7dha4rhjkm5dstfinjv8nogcpc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "a8271fc4b1ea393df8097d421e80e95a695e3604"
+          }
+        },
+        {
           "client_id": "769993340098-92fehcudj9uom0insruh3uvdm0u1q9u5.apps.googleusercontent.com",
           "client_type": 3
         }
