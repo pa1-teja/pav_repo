@@ -11,4 +11,32 @@
         android:layout_height="match_parent"
         android:background="@drawable/splash_screen" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Please Visit: "
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/web_link"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:id="@+id/web_link" />
+    </LinearLayout>
+
 </RelativeLayout>

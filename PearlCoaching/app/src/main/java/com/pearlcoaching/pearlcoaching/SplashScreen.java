@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.widget.TextView;
 
 import com.pearlcoaching.pearlcoaching.ServicesModule.ServicesScreen;
 
@@ -11,11 +13,14 @@ public class SplashScreen extends AppCompatActivity {
 
 
     private final int SPLASH_DISPLAY_LENGTH = 3000;
+    TextView webLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        webLink = findViewById(R.id.web_link);
+        webLink.setMovementMethod(LinkMovementMethod.getInstance());
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {

@@ -72,7 +72,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
     private String mVerificationId;
 
     private Context mContext;
-    private String client_phone,timeline_response;
+    private String client_phone,timeline_response="";
     private String client_name, parent_teacher_response;
     private String client_email;
     private Pattern pattern;
@@ -411,12 +411,41 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.shoot:
-                sendMail();
+                sendMailMsg();
                 break;
             case R.id.next:
                 goToThankYouPage();
                 break;
         }
+    }
+
+    private void sendMailMsg(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Confirm");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("Please E-mail us your information to pearlcoaching.in@gmail.com in order to book a session with us.");
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+//                mListener.onThankYou("");
+                sendMail();
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Write your code here to invoke NO event
+                //Toast.makeText(getApplicationContext(), "NO", Toast.LENGTH_SHORT).show();
+                dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
     }
 
     private void goToThankYouPage() {
@@ -427,7 +456,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         alertDialog.setTitle("Confirm");
 
         // Setting Dialog Message
-        alertDialog.setMessage("Your data will not exist| Please make sure to mailed the data  ,Are you sure you want go next?");
+        alertDialog.setMessage("Please make sure you have E-mailed us the information so that we can contact you.");
 
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -451,13 +480,14 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
 
     boolean checkValidation() {
         //boolean isValid = true;
+        String str = expectation_response.getText().toString();
         if(null != client_phone && pattern.matcher(client_phone).matches()) {
             Toast.makeText(getActivity(), "Please enter valid phone number.",Toast.LENGTH_LONG).show();
             return false;
-        } else if(null != expectation_response && expectation_response.getText().toString().length()>0) {
+        } else if(str.isEmpty() || str.length()>=10) {
             Toast.makeText(getActivity(), "Please enter your expectations from the service.",Toast.LENGTH_LONG).show();
             return false;
-        } else if(null != timeline_response && timeline_response.length()>0) {
+        } else if(timeline_response.isEmpty()) {
             Toast.makeText(getActivity(), "Please select the timeline.",Toast.LENGTH_LONG).show();
             return false;
         }

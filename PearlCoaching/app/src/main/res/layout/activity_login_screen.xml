@@ -9,8 +9,9 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/web_stuff"
         android:layout_centerInParent="true"
+        android:layout_marginBottom="22dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -24,10 +25,38 @@
     <com.facebook.login.widget.LoginButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="12dp"
         android:id="@+id/fb_log_in"/>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/web_stuff"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Please Visit: "
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/web_link"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:id="@+id/web_link" />
     </LinearLayout>
 
 </RelativeLayout>
