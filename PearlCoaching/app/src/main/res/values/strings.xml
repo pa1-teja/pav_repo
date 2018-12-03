@@ -4,6 +4,7 @@
     <string name="facebook_app_id">295727297712094</string>
     <string name="fb_login_protocol_scheme">fb295727297712094</string>
 
+
     <string name="personal_coaching_header">Personal Coaching</string>
     <string name="career_coaching_header">Career Coaching</string>
     <string name="corporate_coaching_header">Corporate Coaching</string>

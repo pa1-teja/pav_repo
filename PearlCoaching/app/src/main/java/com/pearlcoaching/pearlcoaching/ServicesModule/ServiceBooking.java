@@ -62,7 +62,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
     customEditText expectation_response;
     TextView timeline;
     AppCompatTextView parent_teacher_question,expectation_question,timeline_question,service_header;
-    AppCompatButton bookNow, mNext;
+    AppCompatButton bookNow;
     Intent emailIntent;
     LinearLayout otp_module;
 
@@ -117,8 +117,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         parentTeacherGroup.clearCheck();
         timeline = view.findViewById(R.id.coaching_timeline);
         timeline.setTypeface(null, Typeface.BOLD_ITALIC);
-        mNext = view.findViewById(R.id.next);
-        mNext.setOnClickListener(this);
+
         parentTeacherGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -213,6 +212,19 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
 
         pattern = Pattern.compile("(0/91)?[6-9][0-9]{9}");
 
+        sent_otp_code.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus){
+                    String str = sent_otp_code.getText().toString();
+                    if (str.isEmpty())
+                        Toast.makeText(getActivity(), "Please enter the OTP you've received on the mobile number you've entered above.",Toast.LENGTH_LONG).show();
+                    else
+                        verifyVerificationCode(str);
+                }
+            }
+        });
+
         phone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -246,7 +258,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                 if (!hasFocus){
 
                     client_name = name.getText().toString();
-                    if ((client_name == null || client_name.isEmpty() )|| client_name.length() <= 2){
+                    if (client_name.isEmpty() || client_name.length() <= 2){
                         new AlertDialog.Builder(getActivity()).setTitle("Alert").setMessage("Your name should be more than 3 letters. Please check again").create().show();
                     }
 
@@ -257,7 +269,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus == false){
+                if (!hasFocus){
 
                     if (client_phone == null || client_phone.isEmpty() || client_phone.length() !=10){
                         client_phone = "entered invalid number";
@@ -267,15 +279,6 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                 }
             }
         });
-//     phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//         @Override
-//         public void onFocusChange(View v, boolean hasFocus) {
-//
-//             if (hasFocus == false){
-//
-//             }
-//         }
-//     });
 
 
         return view;
@@ -317,7 +320,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                     "<tr>  <td>" + timeline_question.getText() + ": </td> <td> " + timeline_response + "</td> </tr> <br>";
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, Html.fromHtml(body));
             startActivity(Intent.createChooser(emailIntent, "Email:"));
-            mNext.setVisibility(View.VISIBLE);
+            goToThankYouPage();
         }
     }
 
@@ -413,9 +416,9 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             case R.id.shoot:
                 sendMailMsg();
                 break;
-            case R.id.next:
-                goToThankYouPage();
-                break;
+//            case R.id.next:
+//                goToThankYouPage();
+//                break;
         }
     }
 
@@ -432,6 +435,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             public void onClick(DialogInterface dialog,int which) {
 //                mListener.onThankYou("");
                 sendMail();
+//                goToThankYouPage();
             }
         });
 
@@ -450,39 +454,15 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
 
     private void goToThankYouPage() {
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+        mListener.onThankYou("");
 
-        // Setting Dialog Title
-        alertDialog.setTitle("Confirm");
-
-        // Setting Dialog Message
-        alertDialog.setMessage("Please make sure you have E-mailed us the information so that we can contact you.");
-
-        // Setting Positive "Yes" Button
-        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int which) {
-                mListener.onThankYou("");
-            }
-        });
-
-        // Setting Negative "NO" Button
-        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // Write your code here to invoke NO event
-                //Toast.makeText(getApplicationContext(), "NO", Toast.LENGTH_SHORT).show();
-                dialog.cancel();
-            }
-        });
-
-        // Showing Alert Message
-        alertDialog.show();
     }
 
     boolean checkValidation() {
         //boolean isValid = true;
         String str = expectation_response.getText().toString();
-        if(null != client_phone && pattern.matcher(client_phone).matches()) {
-            Toast.makeText(getActivity(), "Please enter valid phone number.",Toast.LENGTH_LONG).show();
+        if(null == client_phone || pattern.matcher(client_phone).matches()) {
+            Toast.makeText(getActivity(), "Please enter valid phone number. Make sure that the mobile number is validated with OTP.",Toast.LENGTH_LONG).show();
             return false;
         } else if(str.isEmpty() || str.length()>=10) {
             Toast.makeText(getActivity(), "Please enter your expectations from the service.",Toast.LENGTH_LONG).show();

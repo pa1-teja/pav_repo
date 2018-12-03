@@ -254,11 +254,11 @@
             style="@style/st_button_submit"
             android:id="@+id/shoot"
             android:text="@string/book_now"/>
-            <android.support.v7.widget.AppCompatButton
-                android:visibility="gone"
-                style="@style/st_button_submit"
-                android:id="@+id/next"
-                android:text="@string/next"/>
+            <!--<android.support.v7.widget.AppCompatButton-->
+                <!--android:visibility="gone"-->
+                <!--style="@style/st_button_submit"-->
+                <!--android:id="@+id/next"-->
+                <!--android:text="@string/next"/>-->
         </LinearLayout>
     </LinearLayout>
 

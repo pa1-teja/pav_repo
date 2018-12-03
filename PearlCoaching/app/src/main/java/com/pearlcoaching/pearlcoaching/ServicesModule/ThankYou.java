@@ -53,13 +53,14 @@ public class ThankYou extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_thank_you, container, false);
         thankYouImage = view.findViewById(R.id.thank_you);
-        /*new Handler().postDelayed(new Runnable(){
+
+        new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                *//* Create an Intent that will start the Menu-Activity. *//*
+                //* Create an Intent that will start the Menu-Activity. *//*
                thankYouImage.setVisibility(View.VISIBLE);
             }
-        }, SPLASH_DISPLAY_LENGTH);*/
+        }, SPLASH_DISPLAY_LENGTH);
         return view;
     }
 
