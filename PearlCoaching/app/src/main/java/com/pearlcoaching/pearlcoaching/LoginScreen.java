@@ -1,8 +1,13 @@
 package com.pearlcoaching.pearlcoaching;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -18,7 +23,10 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -37,6 +45,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.pearlcoaching.pearlcoaching.ServicesModule.ServicesScreen;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class LoginScreen extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -51,16 +62,35 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private GoogleSignInOptions gso;
     private GoogleSignInClient mGoogleSignInClient;
     private LoginButton loginButton;
-    private CallbackManager mCallbackManager;
+
+    private CallbackManager callbackManager;
+
+    public static boolean isConnected(Context context) {
+        ConnectivityManager
+                cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null
+                && activeNetwork.isConnectedOrConnecting();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_login_screen);
+
+        if (!isConnected(this)){
+            new AlertDialog.Builder(this).setMessage("Please check your Internet connection and try logging in again.")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    }).create().show();
+        }
+
         TAG = getPackageName();
         mAuth = FirebaseAuth.getInstance();
+        FacebookLoginSetup();
         mSignInButton = findViewById(R.id.google_log_in);
         mSignInButton.setSize(SignInButton.SIZE_STANDARD);
         // Configure Google Sign In
@@ -75,28 +105,51 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
          mSignInButton.setOnClickListener(this);
 
         // Initialize Facebook Login button
-        mCallbackManager = CallbackManager.Factory.create();
-        loginButton = findViewById(R.id.fb_log_in);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
+//        mCallbackManager = CallbackManager.Factory.create();
+//        loginButton = findViewById(R.id.fb_log_in);
 
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-                // ...
-            }
 
-            @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                Log.e(TAG, "facebook:onError ===D", error);
-            }
-        });
+
+    }
+
+    private void FacebookLoginSetup() {
+        mAuth = FirebaseAuth.getInstance();
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        Toast.makeText(LoginScreen.this,"isLoggedIn: "+isLoggedIn, Toast.LENGTH_LONG).show();
+
+        if(!isLoggedIn) {
+            callbackManager = CallbackManager.Factory.create();
+
+            LoginManager.getInstance().registerCallback(callbackManager,
+                    new FacebookCallback<LoginResult>() {
+                        @Override
+                        public void onSuccess(LoginResult loginResult) {
+                            // App code
+                            Toast.makeText(LoginScreen.this, "FacebookCallback: " + loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
+                            requestData(loginResult.getAccessToken());
+                        }
+
+                        @Override
+                        public void onCancel() {
+                            // App code
+                            Toast.makeText(LoginScreen.this, "FacebookCallback: onCancel", Toast.LENGTH_LONG).show();
+                        }
+
+                        @Override
+                        public void onError(FacebookException exception) {
+                            // App code
+                            Toast.makeText(LoginScreen.this, "FacebookException: " + exception.toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+        } else {
+            Log.d(TAG,"uid : " + accessToken.getUserId());
+            Toast.makeText(LoginScreen.this, "FacebookCallback: " + accessToken.toString(), Toast.LENGTH_LONG).show();
+            requestData(accessToken);
+        }
+        //mCallbackManager = CallbackManager.Factory.create();
+        //createUser(email, password);
+
     }
 
     @Override
@@ -124,6 +177,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Pass the activity result back to the Facebook SDK
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
@@ -141,8 +196,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             }
         }
 
-        // Pass the activity result back to the Facebook SDK
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -213,5 +267,39 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             startActivity(intent);
             finish();
         }
+    }
+
+    private void requestData(AccessToken accessToken) {
+
+        GraphRequest request = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
+            @Override
+            public void onCompleted(JSONObject object, GraphResponse response) {
+
+                final JSONObject json = response.getJSONObject();
+
+                try {
+                    if(json != null){
+
+                        String email = json.getString("name");
+
+
+                        Intent intent = new Intent(getApplicationContext(),ServicesScreen.class);
+                        if (email != null && !email.isEmpty())
+                            intent.putExtra("email",email);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,name,link,email,picture");
+        request.setParameters(parameters);
+        request.executeAsync();
     }
 }
