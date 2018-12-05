@@ -116,7 +116,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         mAuth = FirebaseAuth.getInstance();
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        Toast.makeText(LoginScreen.this,"isLoggedIn: "+isLoggedIn, Toast.LENGTH_LONG).show();
+//        Toast.makeText(LoginScreen.this,"isLoggedIn: "+isLoggedIn, Toast.LENGTH_LONG).show();
 
         if(!isLoggedIn) {
             callbackManager = CallbackManager.Factory.create();
@@ -126,25 +126,25 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         @Override
                         public void onSuccess(LoginResult loginResult) {
                             // App code
-                            Toast.makeText(LoginScreen.this, "FacebookCallback: " + loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(LoginScreen.this, "FacebookCallback: " + loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
                             requestData(loginResult.getAccessToken());
                         }
 
                         @Override
                         public void onCancel() {
                             // App code
-                            Toast.makeText(LoginScreen.this, "FacebookCallback: onCancel", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginScreen.this, "Facebook Login cancelled.", Toast.LENGTH_LONG).show();
                         }
 
                         @Override
                         public void onError(FacebookException exception) {
                             // App code
-                            Toast.makeText(LoginScreen.this, "FacebookException: " + exception.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginScreen.this, "Facebook Login Failed. Pleaze try again after sometime.", Toast.LENGTH_LONG).show();
                         }
                     });
         } else {
             Log.d(TAG,"uid : " + accessToken.getUserId());
-            Toast.makeText(LoginScreen.this, "FacebookCallback: " + accessToken.toString(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(LoginScreen.this, "FacebookCallback: " + accessToken.toString(), Toast.LENGTH_LONG).show();
             requestData(accessToken);
         }
         //mCallbackManager = CallbackManager.Factory.create();
