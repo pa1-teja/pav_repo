@@ -77,6 +77,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
     private String client_name, parent_teacher_response;
     private String client_email;
     private Pattern pattern;
+    private PhoneAuthProvider.ForceResendingToken mResendToken;
 
     public ServiceBooking() {
         // Required empty public constructor
@@ -342,6 +343,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                 60,
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,
+                getActivity(),
                 mCallbacks);
     }
 
@@ -354,6 +356,7 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             //Getting the code sent by SMS
             String code = phoneAuthCredential.getSmsCode();
 
+
             //sometime the code is not detected automatically
             //in this case the code will be null
             //so user has to manually enter the code
@@ -362,12 +365,16 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                 //verifying the code
                 verifyVerificationCode(code);
             }
+
+
         }
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
             Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
             Log.e("$$$$", e.getMessage());
+
+
         }
 
         @Override
@@ -376,6 +383,15 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
 
             //storing the verification id that is sent to the user
             mVerificationId = s;
+
+            // The SMS verification code has been sent to the provided phone number, we
+            // now need to ask the user to enter the code and then construct a credential
+            // by combining the code with a verification ID.
+            Log.d(TAG, "onCodeSent:" + s);
+
+            // Save verification ID and resending token so we can use them later
+//            mVerificationId = verificationId;
+            mResendToken = forceResendingToken;
         }
     };
 

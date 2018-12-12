@@ -15,23 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "769993340098-69dd7j9f0m8b8amcjeul6tsq09mna9t3.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pearlcoaching.pearlcoaching",
-            "certificate_hash": "e10c46ac1be0bbdff3c5b33daa0df9c7c842def9"
-          }
-        },
-        {
-          "client_id": "769993340098-pdpmts5h6o6bh6j18f6o4cge7g5qrct6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pearlcoaching.pearlcoaching",
-            "certificate_hash": "eda6eea8f9d2f6acd67c8b8d8a2019d867e9e76c"
-          }
-        },
-        {
-          "client_id": "769993340098-vv0nad7dha4rhjkm5dstfinjv8nogcpc.apps.googleusercontent.com",
+          "client_id": "769993340098-f20euj9vk8joisdp9t41qckk5coipmn1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.pearlcoaching.pearlcoaching",
@@ -39,13 +23,37 @@
           }
         },
         {
-          "client_id": "769993340098-92fehcudj9uom0insruh3uvdm0u1q9u5.apps.googleusercontent.com",
+          "client_id": "769993340098-c1ihbuoovnt6v414pebf1l6ftmo4ed4n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "e10c46ac1be0bbdff3c5b33daa0df9c7c842def9"
+          }
+        },
+        {
+          "client_id": "769993340098-gighiqj1je1jhnib9soqv7hj9mhv8qo4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "eda6eea8f9d2f6acd67c8b8d8a2019d867e9e76c"
+          }
+        },
+        {
+          "client_id": "769993340098-ifrqpnlmhu73k9pgmjem7ipinga10167.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "2dd779c49e4ceef223dc8c750564c2b5127dd637"
+          }
+        },
+        {
+          "client_id": "769993340098-qj6ajs4r9erqntr3ctm2bemdbahi1vu0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDwUJ-0acQtGagdsM93o474IhPVfQk6D6I"
+          "current_key": "AIzaSyAi7niqLdQ3BaUYlQuOH_9oQqbA8OG08Qk"
         }
       ],
       "services": {
@@ -56,7 +64,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "769993340098-92fehcudj9uom0insruh3uvdm0u1q9u5.apps.googleusercontent.com",
+              "client_id": "769993340098-qj6ajs4r9erqntr3ctm2bemdbahi1vu0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
