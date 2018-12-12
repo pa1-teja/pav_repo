@@ -194,8 +194,14 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         }
 
         name = view.findViewById(R.id.client_name);
+        name.setFocusable(false);
+        name.setFocusableInTouchMode(true);
         phone = view.findViewById(R.id.client_phone);
+        phone.setFocusable(false);
+        phone.setFocusableInTouchMode(true);
         expectation_response = view.findViewById(R.id.expectation_response);
+        expectation_response.setFocusable(false);
+        expectation_response.setFocusableInTouchMode(true);
 
         timeline = view.findViewById(R.id.coaching_timeline);
         parent_teacher_question = view.findViewById(R.id.parent_teacher_question);
@@ -209,6 +215,14 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
         if (client_phone != null && !client_phone.isEmpty())
             phone.setText(client_phone);
 
+
+        expectation_response.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    sent_otp_code.clearFocus();
+            }
+        });
 
 //        String parent_teacher_ques = parent_teacher_question.getText().toString();
 
@@ -273,7 +287,6 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-
                     if (!Patterns.PHONE.matcher(client_phone).matches()) {
                         client_phone = "entered invalid number";
                         new AlertDialog.Builder(getActivity())
@@ -282,13 +295,11 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                                 .create()
                                 .show();
                     }
-//                    if (client_phone == null || client_phone.isEmpty() || client_phone.length() !=10){
-//                        client_phone = "entered invalid number";
-//                        new AlertDialog.Builder(getActivity()).setTitle("Alert").setMessage("Doesn't seem like a valid phone number. Please check again").create().show();
-//                    }
                 }
             }
         });
+
+
 
 
         return view;
@@ -343,7 +354,6 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
                 60,
                 TimeUnit.SECONDS,
                 TaskExecutors.MAIN_THREAD,
-                getActivity(),
                 mCallbacks);
     }
 
@@ -441,9 +451,10 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             case R.id.shoot:
                 sendMailMsg();
                 break;
-//            case R.id.next:
-//                goToThankYouPage();
-//                break;
+            case R.id.client_name:
+                phone.clearFocus();
+                sent_otp_code.clearFocus();
+                break;
         }
     }
 
