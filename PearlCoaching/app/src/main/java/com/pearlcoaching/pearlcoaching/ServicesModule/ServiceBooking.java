@@ -16,6 +16,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -266,16 +267,24 @@ public class ServiceBooking extends BaseFragment implements View.OnClickListener
             }
         });
 
+
         phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus){
+                if (!hasFocus) {
 
-                    if (client_phone == null || client_phone.isEmpty() || client_phone.length() !=10){
+                    if (!Patterns.PHONE.matcher(client_phone).matches()) {
                         client_phone = "entered invalid number";
-                        new AlertDialog.Builder(getActivity()).setTitle("Alert").setMessage("Doesn't seem like a valid phone number. Please check again").create().show();
+                        new AlertDialog.Builder(getActivity())
+                                .setTitle("Alert")
+                                .setMessage("Doesn't seem like a valid phone number. Please check again")
+                                .create()
+                                .show();
                     }
-
+//                    if (client_phone == null || client_phone.isEmpty() || client_phone.length() !=10){
+//                        client_phone = "entered invalid number";
+//                        new AlertDialog.Builder(getActivity()).setTitle("Alert").setMessage("Doesn't seem like a valid phone number. Please check again").create().show();
+//                    }
                 }
             }
         });
