@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ImageView android:layout_width="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:id="@+id/services_list_item_img"
+        android:adjustViewBounds="true" />
+
+</FrameLayout>
+
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+    <ImageView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/services_list_item_img"
+        android:src="@drawable/personal_coaching"
+        android:scaleType="centerInside" />
+</FrameLayout>-->

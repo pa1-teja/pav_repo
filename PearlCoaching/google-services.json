@@ -1,0 +1,79 @@
+{
+  "project_info": {
+    "project_number": "346113716288",
+    "firebase_url": "https://pearl-coaching-3cf1f.firebaseio.com",
+    "project_id": "pearl-coaching-3cf1f",
+    "storage_bucket": "pearl-coaching-3cf1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:346113716288:android:65016f114972cf96",
+        "android_client_info": {
+          "package_name": "com.pearlcoaching.pearlcoaching"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "346113716288-3rdnmg8nofec63jsmiljko3n0nf13iso.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "2dd779c49e4ceef223dc8c750564c2b5127dd637"
+          }
+        },
+        {
+          "client_id": "346113716288-ken7eovjqrh29egeq46hasc6i20u249o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "e10c46ac1be0bbdff3c5b33daa0df9c7c842def9"
+          }
+        },
+        {
+          "client_id": "346113716288-6lm4hidc73kfdvbqfb8u9lc6758237ta.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "09fe1454e4ebc0ef6663fdb117f231e43b1da907"
+          }
+        },
+        {
+          "client_id": "346113716288-a4cjv89m45vau1majndn12rf8c37jip1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pearlcoaching.pearlcoaching",
+            "certificate_hash": "a8271fc4b1ea393df8097d421e80e95a695e3604"
+          }
+        },
+        {
+          "client_id": "346113716288-lb1ptq4pi4ckkde57cuut0nk0hrggo1c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq7HobrOq4ettBx4xqhpI-XQS__mQPVNg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "346113716288-lb1ptq4pi4ckkde57cuut0nk0hrggo1c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
